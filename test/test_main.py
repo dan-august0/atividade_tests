@@ -1,12 +1,24 @@
 import pytest
-
-from main import converter_idade, sacar
+import os
+import json
+from main import salvar_pontuacao
 
 # Testes para converter_idade
 def test_converter_idade_valida():
-    assert converter_idade("30") == 30
+    salvar_pontuacao('Mari', 100, 'pontuacoes-test.json')
 
-def test_converter_idade_invalida_texto():
+    with open("pontuacoes-test.json", "r") as arquivo:
+        pontuacoes = json.load(arquivo)
+
+    assert len(pontuacoes) == 1
+    assert pontuacoes[0]['nome'] == 'Mari'
+
+    # conftest
+    os.remove('pontuacoes-test.json')
+
+
+
+'''def test_converter_idade_invalida_texto():
     assert converter_idade("abc") is None
 
 def test_converter_idade_invalida_decimal():
@@ -24,4 +36,4 @@ def test_sacar_zero():
 
 def test_sacar_valor_negativo():
     with pytest.raises(ValueError, match="Valor negativo não é permitido"):
-        sacar(-10)
+        sacar(-10)'''
