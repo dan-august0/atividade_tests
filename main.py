@@ -1,6 +1,11 @@
 
-def soma(a, b):
-    return a + b
+def converter_idade(texto):
+    try:
+        return int(texto)
+    except ValueError:
+        return None
 
-def dividir(a, b):
-    return a / b
+def sacar(valor):
+    if valor < 0:
+        raise ValueError("Valor negativo não é permitido")
+    return valor
